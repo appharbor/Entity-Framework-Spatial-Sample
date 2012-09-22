@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -8,6 +9,8 @@ namespace Web
 	{
 		protected void Application_Start()
 		{
+			ServicePointManager.DefaultConnectionLimit = int.MaxValue;
+
 			AreaRegistration.RegisterAllAreas();
 
 			WebApiConfig.Register(GlobalConfiguration.Configuration);

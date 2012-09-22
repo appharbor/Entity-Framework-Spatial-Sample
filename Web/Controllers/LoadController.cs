@@ -6,7 +6,7 @@ namespace Web.Controllers
 	{
 		public ActionResult Index()
 		{
-			return Content(string.Format("District parsed"));
+			return Content("Districts parsed");
 		}
 	}
 }
