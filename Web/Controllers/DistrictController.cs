@@ -1,7 +1,7 @@
 ﻿using Core.Persistence;
-using System.Web.Mvc;
-using System.Linq;
 using System.Data.Spatial;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Web.Controllers
 {
@@ -14,15 +14,17 @@ namespace Web.Controllers
 			var point = DbGeography.FromText(string.Format("POINT ({0} {1})", longitude, latitude), 4326);
 			var district = _context.Districts.SingleOrDefault(x => x.Geography.Intersects(point));
 
+			object result = new { };
 			if (district != null)
 			{
-				return Json(new
+				result = new
 				{
 					name = district.Name,
-				});
+					geography = district.Geography.AsText(),
+				};
 			}
 			
-			return Json(new { });
+			return Json(result, JsonRequestBehavior.AllowGet);
 		}
 	}
 }
