@@ -18,23 +18,6 @@ namespace Services.UnitTest
 	public class Scratch
 	{
 		[Fact]
-		public void ParseDistrict()
-		{
-			string responseContent;
-			using (var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip }))
-			{
-				var response = client.GetAsync("http://geo.oiorest.dk/politikredse/12/grænse.json").Result;
-				responseContent = response.Content.ReadAsStringAsync().Result;
-			}
-
-			var json = JObject.Parse(responseContent);
-			var coordinates = json["coordinates"] as JArray;
-			var wkt = coordinates.ToWkt();
-
-			var geography = DbGeography.FromText(wkt);
-		}
-
-		[Fact]
 		public void InsertDistrict()
 		{
 			RemoveDistricts();

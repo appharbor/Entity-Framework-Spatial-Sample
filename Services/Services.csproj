@@ -73,10 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataLoad\OioRest\PoliceDistricts.cs" />
     <Compile Include="DataLoad\ShapeFiles\DagiShapeFileReader.cs" />
     <Compile Include="DataLoad\ShapeFiles\ShapeFileHelper.cs" />
-    <Compile Include="JArrayExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
