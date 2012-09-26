@@ -3,46 +3,25 @@ using Core.Persistence;
 using GeoAPI.Geometries;
 using NetTopologySuite.CoordinateSystems.Transformations;
 using NetTopologySuite.Geometries;
-using Newtonsoft.Json.Linq;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 using Services.DataLoad.ShapeFiles;
-using System.Data.Spatial;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using Xunit;
 
 namespace Services.UnitTest
 {
 	public class Scratch
 	{
-		[Fact]
-		public void InsertDistrict()
-		{
-			RemoveDistricts();
+		private const string skipReason = "Integration test";
 
-			using (var context = new Context())
-			{
-				context.Features.Add(new Feature { Name = "Foo" });
-				context.Features.Add(new Feature { Name = "Bar" });
-				context.SaveChanges();
-			}
-			
-			using (var context = new Context())
-			{
-				Assert.Equal(2, context.Features.Count());
-			}
-		}
-
-		[Fact]
+		[Fact(Skip=skipReason)]
 		public void ReadShapeFile()
 		{
 			var shapes = new ShapeFileHelper().Read("..\\..\\..\\data\\KOMMUNE", "KOMNAVN", "DAGI_ID").ToList();
 		}
 
-
-		[Fact]
+		[Fact(Skip = skipReason)]
 		public void InsertMunicipailitiesFromShapeFile()
 		{
 			RemoveDistricts();
@@ -65,15 +44,6 @@ namespace Services.UnitTest
 			var transform = new CoordinateTransformationFactory().CreateFromCoordinateSystems(
 				ProjectedCoordinateSystem.WGS84_UTM(32, true), GeographicCoordinateSystem.WGS84);
 			var transformedPoint = GeometryTransform.TransformGeometry(GeometryFactory.Default, point, transform.MathTransform);
-		}
-
-		[Fact]
-		public void TestRead()
-		{
-			using (var context = new Context())
-			{
-				var foo = context.Features.First();
-			}
 		}
 
 		private void RemoveDistricts()
