@@ -53,8 +53,8 @@ namespace Services.UnitTest
 				foreach (var shape in shapes)
 				{
 					context.Districts.Add(new District { Name = shape.Key, Geography = shape.Value });
-					context.SaveChanges();
 				}
+				context.SaveChanges();
 			}
 		}
 
