@@ -51,11 +51,18 @@
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Persistence\Configuration.cs" />
     <Compile Include="Persistence\Context.cs" />
+    <Compile Include="Persistence\ContextInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{31a65352-4e38-4b46-ab42-dea1d0124775}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
