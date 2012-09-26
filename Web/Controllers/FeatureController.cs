@@ -1,18 +1,22 @@
-﻿using Core.Persistence;
+﻿using System.Data.Objects.SqlClient;
+using Core.Persistence;
 using System.Data.Spatial;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-	public class DistrictController : Controller
+	public class FeatureController : Controller
 	{
 		Context _context = new Context();
 
 		public ActionResult Show(double latitude, double longitude)
 		{
 			var point = DbGeography.FromText(string.Format("POINT ({0} {1})", longitude, latitude), 4326);
-			var district = _context.Districts.SingleOrDefault(x => x.Geography.Intersects(point));
+			var district = _context.Districts
+				.Where(x => x.Geography.Intersects(point))
+				.Select(x => new { Name = x.Name, Geography = SqlSpatialFunctions.Reduce(x.Geography, 100).AsText() })
+				.SingleOrDefault();
 
 			object result = new { };
 			if (district != null)
@@ -20,7 +24,7 @@ namespace Web.Controllers
 				result = new
 				{
 					name = district.Name,
-					geography = district.Geography.AsText(),
+					geography = district.Geography,
 				};
 			}
 			

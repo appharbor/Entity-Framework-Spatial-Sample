@@ -14,7 +14,6 @@
 		projection: map.displayProjection,
 		style: {
 			fillColor: '#000000',
-			fillOpacity: 0.5
 		}
 	});
 
@@ -24,7 +23,7 @@
 		var lonLat = map.getLonLatFromPixel(event.xy)
 			.transform(map.getProjectionObject(), map.displayProjection);
 		$.ajax({
-			url: '/district/show',
+			url: '/feature/show',
 			data: {
 				latitude: lonLat.lat,
 				longitude: lonLat.lon

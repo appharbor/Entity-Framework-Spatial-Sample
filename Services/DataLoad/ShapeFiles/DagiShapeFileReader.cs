@@ -1,5 +1,4 @@
 ﻿using DotSpatial.Projections;
-using GeoAPI.Geometries;
 using Microsoft.SqlServer.Types;
 using NetTopologySuite.CoordinateSystems.Transformation.DotSpatial.Projections;
 using NetTopologySuite.CoordinateSystems.Transformations;

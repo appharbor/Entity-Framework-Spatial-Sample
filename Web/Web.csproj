@@ -116,7 +116,7 @@
   <ItemGroup>
     <Content Include="assets\css\site.css" />
     <Content Include="assets\js\map.js" />
-    <Compile Include="Controllers\DistrictController.cs" />
+    <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
