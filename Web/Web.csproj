@@ -200,6 +200,9 @@
     <Content Include="assets\js\openlayers\theme\default\style.tidy.css" />
     <Content Include="Global.asax" />
     <Content Include="assets\js\jquery-1.8.1.min.js" />
+    <Content Include="SqlServerSpatial110.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
