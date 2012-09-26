@@ -24,14 +24,23 @@ namespace Core.Persistence
 			{
 				var seedDataDirectory = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
 
+				var reader = new DagiShapeFileReader();
 				IEnumerable<KeyValuePair<string, DbGeography>> shapes;
 				try
 				{
-					shapes = new DagiShapeFileReader().Read(Path.Combine(seedDataDirectory, "data", "KOMMUNE"), "KOMNAVN", "DAGI_ID");
+					shapes = reader.Read(Path.Combine(seedDataDirectory, "data", "KOMMUNE"), "KOMNAVN", "DAGI_ID");
 				}
 				catch (FileNotFoundException)
 				{
-					shapes = new DagiShapeFileReader().Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID");
+					try
+					{
+						shapes = reader.Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID");
+					}
+					catch (FileNotFoundException)
+					{
+						seedDataDirectory = Directory.GetParent(seedDataDirectory).FullName;
+						shapes = reader.Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID");
+					}
 				}
 
 				foreach (var shape in shapes)
