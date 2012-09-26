@@ -14,6 +14,7 @@
 		projection: map.displayProjection,
 		style: {
 			fillColor: '#000000',
+			fillOpacity: 0.5
 		}
 	});
 
