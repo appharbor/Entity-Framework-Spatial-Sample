@@ -18,7 +18,7 @@ namespace Services.UnitTest
 		[Fact(Skip=skipReason)]
 		public void ReadShapeFile()
 		{
-			var shapes = new ShapeFileHelper().Read("..\\..\\..\\data\\KOMMUNE", "KOMNAVN", "DAGI_ID").ToList();
+			var shapes = new ShapeFileHelper().Read("..\\..\\..\\data\\KOMMUNE", "KOMNAVN").ToList();
 		}
 
 		[Fact(Skip = skipReason)]
@@ -26,7 +26,7 @@ namespace Services.UnitTest
 		{
 			RemoveDistricts();
 
-			var shapes = new DagiShapeFileReader().Read("..\\..\\..\\data\\KOMMUNE", "KOMNAVN", "DAGI_ID");
+			var shapes = new DagiShapeFileReader().Read("..\\..\\..\\data\\KOMMUNE", "KOMNAVN");
 			using (var context = new Context())
 			{
 				foreach (var shape in shapes)

@@ -24,19 +24,16 @@ namespace Services.DataLoad.ShapeFiles
 			_transform = new DotSpatialMathTransform(etrs89utmprojection, wgs84projection);
 		}
 
-		public IEnumerable<KeyValuePair<string, DbGeography>> Read(string filePath, string nameColumnIdentifier,
-			string idColumnIdentifier)
+		public IEnumerable<KeyValuePair<string, DbGeography>> Read(string filePath, string nameColumnIdentifier)
 		{
-			var shapeFileHelper = new ShapeFileHelper();
-			var shapes = shapeFileHelper.Read(filePath, nameColumnIdentifier, idColumnIdentifier);
-			
+			var shapes = new ShapeFileHelper().Read(filePath, nameColumnIdentifier);
 			return shapes.AsParallel().Select(x =>
 			{
 				var transformedGeography = GeometryTransform.TransformGeometry(
-						GeometryFactory.Default, x.Value, _transform);
+					GeometryFactory.Default, x.Value, _transform);
 
 				var sqlGeography = SqlGeography.STGeomFromText(new SqlChars(transformedGeography.AsText()), 4326)
-						.MakeValid();
+					.MakeValid();
 
 				var invertedSqlGeography = sqlGeography.ReorientObject();
 				if (sqlGeography.STArea() > invertedSqlGeography.STArea())
