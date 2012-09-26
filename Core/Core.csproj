@@ -51,12 +51,17 @@
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Persistence\Configuration.cs" />
     <Compile Include="Persistence\Context.cs" />
-    <Compile Include="Persistence\ContextInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="data\KOMMUNE.dbf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\KOMMUNE.shp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Services\Services.csproj">
