@@ -6,7 +6,6 @@
 			new OpenLayers.Layer.Stamen("watercolor")
 		],
 		controls: [
-			new OpenLayers.Control.TouchNavigation()
 		]
 	});
 
