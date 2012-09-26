@@ -24,14 +24,14 @@ namespace Services.UnitTest
 
 			using (var context = new Context())
 			{
-				context.Districts.Add(new District { Name = "Foo" });
-				context.Districts.Add(new District { Name = "Bar" });
+				context.Features.Add(new Feature { Name = "Foo" });
+				context.Features.Add(new Feature { Name = "Bar" });
 				context.SaveChanges();
 			}
 			
 			using (var context = new Context())
 			{
-				Assert.Equal(2, context.Districts.Count());
+				Assert.Equal(2, context.Features.Count());
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace Services.UnitTest
 			{
 				foreach (var shape in shapes)
 				{
-					context.Districts.Add(new District { Name = shape.Key, Geography = shape.Value });
+					context.Features.Add(new Feature { Name = shape.Key, Geography = shape.Value });
 				}
 				context.SaveChanges();
 			}
@@ -72,7 +72,7 @@ namespace Services.UnitTest
 		{
 			using (var context = new Context())
 			{
-				var foo = context.Districts.First();
+				var foo = context.Features.First();
 			}
 		}
 
@@ -80,9 +80,9 @@ namespace Services.UnitTest
 		{
 			using (var context = new Context())
 			{
-				foreach (var district in context.Districts)
+				foreach (var district in context.Features)
 				{
-					context.Districts.Remove(district);
+					context.Features.Remove(district);
 				}
 				context.SaveChanges();
 			}

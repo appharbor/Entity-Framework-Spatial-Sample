@@ -2,7 +2,7 @@
 
 namespace Core.Model
 {
-	public class District : Entity
+	public class Feature : Entity
 	{
 		public string Name { get; set; }
 		public DbGeography Geography { get; set; }

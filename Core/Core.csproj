@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\District.cs" />
+    <Compile Include="Model\Feature.cs" />
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Persistence\Configuration.cs" />
     <Compile Include="Persistence\Context.cs" />

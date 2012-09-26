@@ -13,7 +13,7 @@ namespace Web.Controllers
 		public ActionResult Show(double latitude, double longitude)
 		{
 			var point = DbGeography.FromText(string.Format("POINT ({0} {1})", longitude, latitude), 4326);
-			var district = _context.Districts
+			var district = _context.Features
 				.Where(x => x.Geography.Intersects(point))
 				.Select(x => new { Name = x.Name, Geography = SqlSpatialFunctions.Reduce(x.Geography, 100).AsText() })
 				.SingleOrDefault();

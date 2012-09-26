@@ -18,14 +18,14 @@ namespace Core.Persistence
 
 		protected override void Seed(Context context)
 		{
-			if (!context.Districts.Any())
+			if (!context.Features.Any())
 			{
 				var location = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
 				var dataPath = Path.Combine(Path.GetDirectoryName(location), "data", "KOMMUNE");
 				var shapes = new DagiShapeFileReader().Read(dataPath, "KOMNAVN", "DAGI_ID");
 				foreach (var shape in shapes)
 				{
-					context.Districts.Add(new District { Name = shape.Key, Geography = shape.Value });
+					context.Features.Add(new Feature { Name = shape.Key, Geography = shape.Value });
 				}
 				context.SaveChanges();
 			}

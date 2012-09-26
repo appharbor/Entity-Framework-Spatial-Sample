@@ -6,7 +6,7 @@ namespace Core.Persistence
 {
 	public class Context : DbContext
 	{
-		public DbSet<District> Districts { get; set; }
+		public DbSet<Feature> Features { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
