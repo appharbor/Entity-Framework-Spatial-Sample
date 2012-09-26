@@ -31,7 +31,6 @@ namespace Core.Persistence
 				}
 				catch (FileNotFoundException)
 				{
-					seedDataDirectory = Directory.GetParent(seedDataDirectory).FullName;
 					shapes = new DagiShapeFileReader().Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID");
 				}
 
