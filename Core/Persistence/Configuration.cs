@@ -1,7 +1,9 @@
 ﻿using Core.Model;
 using Services.DataLoad.ShapeFiles;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Spatial;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,9 +22,19 @@ namespace Core.Persistence
 		{
 			if (!context.Features.Any())
 			{
-				var location = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
-				var dataPath = Path.Combine(Path.GetDirectoryName(location), "data", "KOMMUNE");
-				var shapes = new DagiShapeFileReader().Read(dataPath, "KOMNAVN", "DAGI_ID");
+				var seedDataDirectory = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+
+				IEnumerable<KeyValuePair<string, DbGeography>> shapes;
+				try
+				{
+					shapes = new DagiShapeFileReader().Read(Path.Combine(seedDataDirectory, "data", "KOMMUNE"), "KOMNAVN", "DAGI_ID");
+				}
+				catch (FileNotFoundException)
+				{
+					seedDataDirectory = Directory.GetParent(seedDataDirectory).FullName;
+					shapes = new DagiShapeFileReader().Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID");
+				}
+
 				foreach (var shape in shapes)
 				{
 					context.Features.Add(new Feature { Name = shape.Key, Geography = shape.Value });
