@@ -28,7 +28,7 @@ namespace Core.Persistence
 				IEnumerable<KeyValuePair<string, DbGeography>> shapes;
 				try
 				{
-					shapes = reader.Read(Path.Combine(seedDataDirectory, "datab", "KOMMUNE"), "KOMNAVN", "DAGI_ID").ToList();
+					shapes = reader.Read(Path.Combine(seedDataDirectory, "data", "KOMMUNE"), "KOMNAVN", "DAGI_ID").ToList();
 				}
 				catch (FileNotFoundException)
 				{
