@@ -28,19 +28,11 @@ namespace Core.Persistence
 				IEnumerable<KeyValuePair<string, DbGeography>> shapes;
 				try
 				{
-					shapes = reader.Read(Path.Combine(seedDataDirectory, "data", "KOMMUNE"), "KOMNAVN", "DAGI_ID").ToList();
+					shapes = reader.Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID").ToList();
 				}
 				catch (FileNotFoundException)
 				{
-					try
-					{
-						shapes = reader.Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID").ToList();
-					}
-					catch (FileNotFoundException)
-					{
-						seedDataDirectory = Directory.GetParent(seedDataDirectory).FullName;
-						shapes = reader.Read(Path.Combine(seedDataDirectory, "KOMMUNE"), "KOMNAVN", "DAGI_ID").ToList();
-					}
+					shapes = reader.Read(Path.Combine(seedDataDirectory, "data", "KOMMUNE"), "KOMNAVN", "DAGI_ID").ToList();
 				}
 
 				foreach (var shape in shapes)
