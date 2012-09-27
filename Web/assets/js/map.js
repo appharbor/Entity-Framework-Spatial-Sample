@@ -17,10 +17,11 @@
 
 	var vector = new OpenLayers.Layer.Vector("Vector Layer", {
 		projection: map.displayProjection,
-		style: {
+		styleMap: new OpenLayers.StyleMap({'default':{
 			fillColor: '#000000',
-			fillOpacity: 0.5
-		}
+			fillOpacity: 0.5,
+			label: '${name}'
+		}})
 	});
 
 	map.addLayer(vector);
@@ -40,10 +41,13 @@
 				'externalProjection': map.displayProjection
 			});
 
-			var features = reader.read(result.geography);
+			var feature = reader.read(result.geography);
+			feature.attributes = {
+				name: result.name
+			};
 
 			vector.removeAllFeatures();
-			vector.addFeatures(features);
+			vector.addFeatures(feature);
 
 			map.zoomToExtent(vector.getDataExtent());
 		});
