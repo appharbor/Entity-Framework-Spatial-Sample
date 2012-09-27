@@ -4,11 +4,6 @@
 		displayProjection: "EPSG:4326",
 		layers: [
 			new OpenLayers.Layer.Stamen("watercolor")
-		],
-		controls: [
-			new OpenLayers.Control.Attribution(),
-			new OpenLayers.Control.Navigation(),
-			new OpenLayers.Control.CacheRead()
 		]
 	});
 
