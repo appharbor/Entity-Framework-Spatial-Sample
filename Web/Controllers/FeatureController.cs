@@ -18,17 +18,18 @@ namespace Web.Controllers
 				.Select(x => new { Name = x.Name, Geography = SqlSpatialFunctions.Reduce(x.Geography, 100).AsText() })
 				.SingleOrDefault();
 
-			object result = new { };
 			if (district != null)
 			{
-				result = new
+				return Json(new
 				{
 					name = district.Name,
 					geography = district.Geography,
-				};
+				}, JsonRequestBehavior.AllowGet);
 			}
-			
-			return Json(result, JsonRequestBehavior.AllowGet);
+
+			Response.StatusCode = 404;
+			Response.TrySkipIisCustomErrors = true;
+			return Json(new { }, JsonRequestBehavior.AllowGet);
 		}
 	}
 }
